@@ -8,13 +8,22 @@ public class Consulta {
             "mercadoLivreOficial@gmail.com"
     };
 
+    private static final int limitadorGolpe = 3;
+    private static final int limitadorSuspeita = 0;
+
     public String[] getEmailsOficiais() {
         return emailsOficiais;
     }
 
-    public void checarEmpresa(int numEmpresa) {
-        if(numEmpresa < 0 || numEmpresa > emailsOficiais.length - 1) {
+    public void checarEmpresa(int numEmpresa, Scanner scanner, Verificar verificar) {
+        if(numEmpresa < -1 || numEmpresa > emailsOficiais.length - 1) {
             System.out.println("Não existe uma empresa com este número.");
+        } else if(numEmpresa == -1) {
+            System.out.println("Continuando verificação.");
+        } else {
+            System.out.println("Qual o e-mail do remetente?");
+            String emailMensagem = scanner.nextLine();
+            verificar.checarEmail(emailMensagem, numEmpresa);
         }
     }
 
@@ -31,9 +40,9 @@ public class Consulta {
     }
 
     public void checarPerigo(Verificar verificar) {
-        if(verificar.getContadorSuspeita() >= 3) {
+        if(verificar.getContadorSuspeita() >= limitadorGolpe) {
             System.out.println(verificar.getContadorSuspeita() + " suspeitas foram contadas. Provavelmente é golpe!");
-        } else if(verificar.getContadorSuspeita() > 0 && verificar.getContadorSuspeita() < 3) {
+        } else if(verificar.getContadorSuspeita() > limitadorSuspeita && verificar.getContadorSuspeita() < limitadorGolpe) {
             System.out.println(verificar.getContadorSuspeita() + " suspeitas foram contadas. A mensagem é suspeita, tenha cuidado");
         } else {
             System.out.println("Nenhuma suspeita foi encontrada. Provavelmente é legítimo.");

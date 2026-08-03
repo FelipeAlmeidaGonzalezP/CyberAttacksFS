@@ -26,17 +26,13 @@ public class Main {
         //Checa a empresa do remetente
         do {
             System.out.println("Qual a empresa que diz ter mandado o e-mail?");
-            System.out.println("1. ElDorado \n2. Netflix \n3. Amazon \n4. Mercado Livre");
+            System.out.println("0. Nenhuma destas empresas \n1. ElDorado \n2. Netflix \n3. Amazon \n4. Mercado Livre");
             numEmpresa = scanner.nextInt() - 1;
             scanner.nextLine();
 
-            consulta.checarEmpresa(numEmpresa);
-        } while (numEmpresa < 0 || numEmpresa > consulta.getEmailsOficiais().length - 1);
-
-        //Checa se o e-mail do remetente corresponde com o e-mail oficial da empresa selecionada
-        System.out.println("Qual o e-mail de quem enviou a mensagem?");
-        String emailMensagem = scanner.nextLine();
-        verificar.checarEmail(emailMensagem, numEmpresa);
+            //Se for algumas das empresas, checa se o e-mail corresponde ao e-mail oficial
+            consulta.checarEmpresa(numEmpresa, scanner, verificar);
+        } while (numEmpresa < -1 || numEmpresa > consulta.getEmailsOficiais().length - 1);
 
         //Checa o contador de suspeita e imprime um texto falando qual a quantidade de suspeitas e seu nível de perigo
         consulta.checarPerigo(verificar);
