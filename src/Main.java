@@ -13,7 +13,7 @@ public class Main {
         do {
             System.out.print("A mensagem está acompanhada de um link? (S/N)");
             possuiLink = scanner.nextLine();
-            verificar.checarPossuiLink(possuiLink, scanner);
+            consulta.checarPossuiLink(possuiLink, scanner, verificar);
         } while (!possuiLink.equalsIgnoreCase("S")
                 && !possuiLink.equalsIgnoreCase("N"));
 
@@ -36,10 +36,10 @@ public class Main {
         //Checa se o e-mail do remetente corresponde com o e-mail oficial da empresa selecionada
         System.out.println("Qual o e-mail de quem enviou a mensagem?");
         String emailMensagem = scanner.nextLine();
-        consulta.checarEmail(emailMensagem, numEmpresa);
+        verificar.checarEmail(emailMensagem, numEmpresa);
 
         //Checa o contador de suspeita e imprime um texto falando qual a quantidade de suspeitas e seu nível de perigo
-        consulta.checarPerigo();
+        consulta.checarPerigo(verificar);
 
         scanner.close();
     }

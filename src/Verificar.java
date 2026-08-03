@@ -39,16 +39,26 @@ public class Verificar {
         this.consulta = consulta;
     }
 
+    private int contadorSuspeita = 0;
+
+    public int getContadorSuspeita() {
+        return contadorSuspeita;
+    }
+
+    public void adicionarSuspeita() {
+        contadorSuspeita+=1;
+    }
+
     public void checarLink(String link) {
         if(link.startsWith("https")) {
             System.out.println("O link segue o protocolo de segurança HTTPS.");
         } else {
             System.out.println("O link não segue o protocolo de segurança HTTPS.");
-            consulta.adicionarSuspeita();
+            adicionarSuspeita();
         }
         if(link.contains("bit.ly") || link.contains("tinyurl")) {
             System.out.println("O link foi encurtado, escondendo seu destino real.");
-            consulta.adicionarSuspeita();
+            adicionarSuspeita();
         }
     }
 
@@ -56,25 +66,22 @@ public class Verificar {
         long quantidadePalavrasSuspeitas = palavrasSuspeitas.stream().filter(mensagem::contains).count();
         if(quantidadePalavrasSuspeitas > 1) {
             System.out.println("Múltiplas palavras suspeitas foram detectadas.");
-            consulta.adicionarSuspeita();
-            consulta.adicionarSuspeita();
+            adicionarSuspeita();
+            adicionarSuspeita();
         } else if(quantidadePalavrasSuspeitas == 1) {
             System.out.println("Somente uma palavra suspeita foi detectada.");
-            consulta.adicionarSuspeita();
+            adicionarSuspeita();
         } else {
             System.out.println("Nenhuma palavra suspeita foi detectada.");
         }
     }
 
-    public void checarPossuiLink(String possuiLink, Scanner scanner) {
-        if(possuiLink.equalsIgnoreCase("S")) {
-            System.out.println("Digite o link enviado na mensagem:");
-            String link = scanner.nextLine();
-            checarLink(link);
-        } else if(possuiLink.equalsIgnoreCase("N")) {
-            System.out.println("Seguindo para a próxima verificação.");
+    public void checarEmail(String emailMensagem, int numEmpresa) {
+        if(emailMensagem.equalsIgnoreCase(consulta.getEmailsOficiais()[numEmpresa])) {
+            System.out.println("E-mail corresponde ao e-mail oficial.");
         } else {
-            System.out.println("Opção inválida.");
+            System.out.println("E-mail NÃO corresponde ao e-mail oficial");
+            adicionarSuspeita();
         }
     }
 }
