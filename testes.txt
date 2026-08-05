@@ -1,0 +1,19 @@
+Teste um:
+N
+
+Mensagem: Parabéns! Você acabou de ganhar um carro novo! Para pegar sua recompensa, instale o programa abaixo e mande o código que aparecer para desbloquear o seu prêmio!
+
+3
+
+amazonTotalmenteOficial@gmail.com
+
+Teste dois:
+S
+
+https:://elDoradoOficial.com.br
+
+Mensagem: Olá! Você foi aceito na empresa após sua entrevista, acesso o link oficial para agendar sua primeira visita.
+
+1
+
+elDoradoOficial@gmail.com
